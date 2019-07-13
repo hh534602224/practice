@@ -62,10 +62,13 @@ $('.addshopcar').on('click',function(){
 if(iscunzai==undefined){
     /* 如果没有本页面的数据，就是说是个新商品了，就要创建对象吧他存进去数组arr里面去
     其实要存起来的数据和上个页面数据是一样的，就是多了一个你要购买的商品量而已,实际来说，id是全购物
-    网唯一的，只需要存id和数量就行了，到了页面再根据id从服务器获取*/
+    网唯一的，只需要存id和数量就行了，到了页面再根据id从服务器获取，这里为了方便都加进去*/
     let now={
         pID:obj.pID,
-        number:number
+        number:number,
+        name: obj.name,
+        price: obj.price,
+        imgSrc: obj.imgSrc,
     }
     arr.push(now);
 }else{
