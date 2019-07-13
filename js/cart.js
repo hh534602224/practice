@@ -152,7 +152,41 @@ $(() => {
       $(this).parents('.row').children().children('.computed').text(obj.number*obj.price)
 
     })
-    
+    // 删除购物车的商品
+    $('.item-list').on('click','.item-del',function(){
+      let santhis=this; // 保存删除对象
+     //  let detal=alert('你确定删除？') 没意义，不能用
+     //  console.log(detal);
+     $("#dialog-confirm").dialog({
+       resizable: false,
+       height: 140,
+       modal: true,
+       buttons: {
+         "确认": function () {
+           $(this).dialog("close");
+           // 把对应的商品删除
+           // 把对应的结构移除
+           $(santhis).parents('.item').remove();
+           // 把数据库移除
+           // 根据id获取数据库里面的数据
+           let id = parseInt($(santhis).parents('.item').attr('data-id'));
+           // h5里的，数组新增了一个方法，获取满足条件的元素的索引          
+           let index = arr.findIndex((e)=>{
+             return e.pID === id
+           })
+          //  根据索引删除数据
+           arr.splice(index, 1);
+           // 把数据覆盖回本地
+           let jsonStr = JSON.stringify(arr);
+           localStorage.setItem('shopCartData', jsonStr);
+         },
+         "取消": function () {
+           $(this).dialog("close");
+         }
+       }
+     });
+ 
+     })
 
 
 
